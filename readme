@@ -1,0 +1,42 @@
+Brandon Gower-Winter
+CSC3022H Assigment 1
+
+HOW TO USE:
+
+type 'make' in console to compile and link the source code.
+type 'make run' in console to run the executable located in the /bin folder
+optional: clean folders with 'make clean' to remove object files
+
+Files loaded and saved all use a base url of .../CSC3022HASS1/
+A default database file has been provided. To load it: type 'students' when prompted provided you have not
+moved the file.
+If the file was moved. Adjust the name of the file accordingly. EG: If the students file were moved to /bin the
+new file name that would need to be provided would be 'bin/students'
+
+DATABASE FORMAT:
+
+The database is formatted like so:
+
+[Name],[Surname],[Student Number],[Class Records]
+
+Each attribute is seperated by a ','. If there are any spaces between the ','s and the attributes.
+There is a possibility of Student Numbers not being found.
+
+Student numbers are not case sensitive.
+
+FILE EXPLANATION:
+
+students: A txt file containing information on two students that can be used for testing.
+
+makefile: The makefile that allows for automatic compilation and linking of the program.
+
+driver.cpp: The driver of the application. Contains the main method for the program.
+
+Interace.cpp: Contains all the code that relates to how the user interacts with the command prompt.
+This includes the vector of student records. Has a header file called Interface.h
+
+StringUtilities.cpp: A small cpp file that contains any string mainipulatin functions created to make string
+tokenisation and comparing easier. Has a header file called StringUtilities.h
+
+Student.cpp: A cpp file that contains all the code for the student struct. The struct holds the student's name,
+surname, student number and class records. Has a header file called Student.h
