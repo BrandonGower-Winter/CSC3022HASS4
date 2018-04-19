@@ -6,7 +6,7 @@ CC := g++
 CCFLAGS := -std=c++11
 SRCDIR := src
 BUILDDIR := build
-EXECUTABLE := bin/driver
+EXECUTABLE := bin/imageops
 
 SRCFLEXT := cpp
 
@@ -26,3 +26,4 @@ run:
 
 clean:
 	rm -f build/*.o
+	rm -f ./bin/
