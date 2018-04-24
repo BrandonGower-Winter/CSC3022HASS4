@@ -19,13 +19,14 @@ namespace GWRBRA001
       std::unique_ptr<unsigned char[]> imageBuffer;
     public:
       //Constructors
-      /*
+
       Image(void);
       ~Image(void);
-      Image(int width,int height,char[] imageBuffer);
+      Image(int width,int height,unsigned char imageData[]);
+
       Image(const Image & copy);
       Image(Image && move);
-
+      /*
       //Operator Overloads
       Image & operator=(const Image & copy);
       Image & operator=(Image && move);
@@ -60,13 +61,13 @@ namespace GWRBRA001
           void operator--();
           bool operator==(iterator rhs);
           bool operator!=(iterator rhs);
-          unsigned char operator*();
+          unsigned char & operator*() const;
           friend Image;
         };
       // define begin()/end() to get iterator to start and
       // "one-past" end.
-      iterator begin(void);
-      iterator end(void);
+      iterator begin(void) const;
+      iterator end(void) const;
   };
 
   //std::ostream& operator<<(std::ostream & os, const Image& img); //Output
