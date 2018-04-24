@@ -28,13 +28,23 @@ unsigned char GWRBRA001::Image::iterator::operator*()
 {
   return *GWRBRA001::Image::iterator::ptr;
 }
-//Possible Change
+
 bool GWRBRA001::Image::iterator::operator==(iterator rhs)
 {
   return GWRBRA001::Image::iterator::ptr == rhs.ptr;
 }
-//Possible Change
+
 bool GWRBRA001::Image::iterator::operator!=(iterator rhs)
 {
   return !GWRBRA001::Image::iterator::operator!=(rhs);
+}
+
+GWRBRA001::Image::iterator GWRBRA001::Image::begin(void)
+{
+  return GWRBRA001::Image::iterator(GWRBRA001::Image::imageBuffer.get());
+}
+GWRBRA001::Image::iterator GWRBRA001::Image::end(void)
+{
+  int endPos = GWRBRA001::Image::width * GWRBRA001::Image::height;
+  return GWRBRA001::Image::iterator(GWRBRA001::Image::imageBuffer.get() + endPos);
 }

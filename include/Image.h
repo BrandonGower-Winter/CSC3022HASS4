@@ -65,8 +65,8 @@ namespace GWRBRA001
         };
       // define begin()/end() to get iterator to start and
       // "one-past" end.
-      //iterator begin(void); // etc
-      //iterator end(void);
+      iterator begin(void);
+      iterator end(void);
   };
 
   //std::ostream& operator<<(std::ostream & os, const Image& img); //Output
