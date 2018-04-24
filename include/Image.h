@@ -56,9 +56,11 @@ namespace GWRBRA001
           // define overloaded ops: *, ++, --, =
           iterator & operator=(const iterator & rhs);
           // other methods for iterator
-          //void operator++();
-          //void operator--();
-          //unsigned char operator*()
+          void operator++();
+          void operator--();
+          bool operator==(iterator rhs);
+          bool operator!=(iterator rhs);
+          unsigned char operator*();
           friend Image;
         };
       // define begin()/end() to get iterator to start and
