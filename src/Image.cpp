@@ -62,6 +62,59 @@ GWRBRA001::Image & GWRBRA001::Image::operator=(Image && move)
 
   return *this;
 }
+//Add
+GWRBRA001::Image GWRBRA001::Image::operator+(const Image & rhs)
+{
+  if(GWRBRA001::Image::width * GWRBRA001::Image::height != rhs.width * rhs.height)
+  {
+    return GWRBRA001::Image();
+  }
+  GWRBRA001::Image temp(rhs.width,rhs.height);
+  GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
+  GWRBRA001::Image::iterator rhsBeg = rhs.begin();
+  GWRBRA001::Image::iterator tempBeg = temp.begin();
+
+  while(beg != end)
+  {
+    *tempBeg = *beg + *rhsBeg;
+    *tempBeg = GWRBRA001::Image::clamp(*tempBeg);
+    ++tempBeg;
+    ++beg;
+    ++rhsBeg;
+  }
+  return temp;
+}
+//Sub
+GWRBRA001::Image GWRBRA001::Image::operator-(const Image & rhs)
+{
+  if(GWRBRA001::Image::width * GWRBRA001::Image::height != rhs.width * rhs.height)
+  {
+    return GWRBRA001::Image();
+  }
+  GWRBRA001::Image temp(rhs.width,rhs.height);
+  GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
+  GWRBRA001::Image::iterator rhsBeg = rhs.begin();
+  GWRBRA001::Image::iterator tempBeg = temp.begin();
+
+  while(beg != end)
+  {
+    *tempBeg = *beg + *rhsBeg;
+    *tempBeg = GWRBRA001::Image::clamp(*tempBeg);
+    ++tempBeg;
+    ++beg;
+    ++rhsBeg;
+  }
+  return temp;
+}
+
+
+unsigned char GWRBRA001::Image::clamp(const unsigned char & val)
+{
+  if(val > 255) return 255;
+  if(val < 0) return 0;
+  return val;
+}
+
 /********************Define Iterator********************/
 GWRBRA001::Image::iterator::iterator(u_char *p) : ptr(p) {}
 

@@ -31,10 +31,11 @@ namespace GWRBRA001
       //Operator Overloads
       Image & operator=(const Image & copy);
       Image & operator=(Image && move);
-      /*
+
       //Make sure they are the same size
-      Image & operator+(const Image & rhs); //Add
-      Image & operator-(const Image & rhs); //Sub
+      Image operator+(const Image & rhs); //Add
+      Image operator-(const Image & rhs); //Sub
+      /*
       Image & operator!(); //Invert
       Image & operator/(const Image & rhs);//Mask
       Image & operator*(int threshold);
@@ -47,7 +48,7 @@ namespace GWRBRA001
       friend std::ostream& operator<<(std::ostream & os, const Image& img); //Output
       friend std::istream & operator>>(std::istream & is, Image & img); //Input
       */
-
+      unsigned char clamp(const unsigned char & val);
       //Iterator
       class iterator
       {
