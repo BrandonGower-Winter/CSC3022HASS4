@@ -41,8 +41,8 @@ namespace GWRBRA001
       Image operator*(int threshold);
 
       //Functions
-      //void load(std::string filePath);
-      //void save(std::string filePath);
+      void load(std::string filePath);
+      void save(std::string filePath);
 
       //Friends
       friend std::ostream& operator<<(std::ostream & os, const Image& img); //Output

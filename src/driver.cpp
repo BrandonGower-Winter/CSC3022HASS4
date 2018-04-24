@@ -9,11 +9,13 @@ int main(int argc, char const *argv[])
     std::cout << "Error!!: Function not recognized." << '\n';
     return 1;
   }
-  std::string outputFileName;
   if(argc == 4)
   {
     //outputFileName = argv[3];
     std::cout << "Image invert called" << '\n';
+    GWRBRA001::Image img;
+    img.load(argv[2]);
+    img.save(argv[3]);
   }
   else if(argc == 5)
   {

@@ -1,6 +1,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <sstream>
 #include "../include/Image.h"
 /********************Define Image********************/
 GWRBRA001::Image::Image(){}
@@ -178,16 +179,71 @@ unsigned char GWRBRA001::Image::clamp(const unsigned char & val)
   if(val < 0) return 0;
   return val;
 }
-/*
 void GWRBRA001::Image::load(std::string filePath)
 {
+  std::ifstream in(filePath,std::ios::binary);
+  if(!in)
+  {
+    std::cout << "File does not exist: " << filePath << '\n';
+    return;
+  }
+  std::string placeHolder;
+  std::getline(in,placeHolder,'\n');
+  if(placeHolder != "P5")
+  {
+    std::cout << "Image not PGM: " << placeHolder << '\n';
+    return;
+  }
+  int rows,cols;
+  while(std::getline(in,placeHolder,'\n'))
+  {
+    if(placeHolder[0] != '#')
+    {
+      std::stringstream strStream(placeHolder);
+      strStream >> rows;
+      strStream >> cols;
+      break;
+    }
+    else
+      std::cout << "Comment:" << '\n' << placeHolder << '\n';
+  }
+  int threshold;
+  in >> threshold;
+  GWRBRA001::Image::width = cols;
+  GWRBRA001::Image::height = rows;
+  std::cout << "Rows: "<< rows << " Cols: " << cols << '\n';
+  std::cout << "Threshold Value: " << threshold << '\n';
 
+  GWRBRA001::Image::imageBuffer = std::unique_ptr<unsigned char[]>(new unsigned char[cols * rows]);
+  /*GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
+  while(beg != end)
+  {
+    in >> *beg;
+    ++beg;
+  }*/
+  in >> *this;
 }
+
 void GWRBRA001::Image::save(std::string filePath)
 {
-
+  std::ofstream out(filePath,std::ios::binary);
+  if(!out)
+  {
+    std::cout << "File does not exist: " << filePath << '\n';
+    return;
+  }
+  out << "P5" << '\n';
+  out << "# Created by the GWRBRA001 image processeor!" << '\n';
+  out << GWRBRA001::Image::height << ' ' << GWRBRA001::Image::height << '\n';
+  out << 255 << '\n';
+  /*GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
+  while(beg != end)
+  {
+    out << *beg;
+    ++beg;
+  }*/
+  out << *this;
 }
-*/
 
 std::ostream& GWRBRA001::operator<<(std::ostream & os, const GWRBRA001::Image& img)
 {
@@ -245,7 +301,7 @@ bool GWRBRA001::Image::iterator::operator==(iterator rhs)
 
 bool GWRBRA001::Image::iterator::operator!=(iterator rhs)
 {
-  return !GWRBRA001::Image::iterator::operator!=(rhs);
+  return !GWRBRA001::Image::iterator::operator==(rhs);
 }
 
 GWRBRA001::Image::iterator GWRBRA001::Image::begin(void) const
