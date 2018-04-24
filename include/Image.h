@@ -35,11 +35,11 @@ namespace GWRBRA001
       //Make sure they are the same size
       Image operator+(const Image & rhs); //Add
       Image operator-(const Image & rhs); //Sub
-      /*
-      Image & operator!(); //Invert
-      Image & operator/(const Image & rhs);//Mask
-      Image & operator*(int threshold);
 
+      Image operator!(); //Invert
+      Image operator/(const Image & rhs);//Mask
+      Image operator*(int threshold);
+      /*
       //Functions
       void load(std::string filePath);
       void save(std::string filePath);

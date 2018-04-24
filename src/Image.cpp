@@ -98,7 +98,7 @@ GWRBRA001::Image GWRBRA001::Image::operator-(const Image & rhs)
 
   while(beg != end)
   {
-    *tempBeg = *beg + *rhsBeg;
+    *tempBeg = *beg - *rhsBeg;
     *tempBeg = GWRBRA001::Image::clamp(*tempBeg);
     ++tempBeg;
     ++beg;
@@ -107,6 +107,69 @@ GWRBRA001::Image GWRBRA001::Image::operator-(const Image & rhs)
   return temp;
 }
 
+GWRBRA001::Image GWRBRA001::Image::operator!() //Invert
+{
+  GWRBRA001::Image temp(GWRBRA001::Image::width,GWRBRA001::Image::height);
+  GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
+  GWRBRA001::Image::iterator tempBeg = temp.begin();
+  while(beg != end)
+  {
+    *tempBeg = 255 - *beg; //No need to clamp
+    ++tempBeg;
+    ++beg;
+  }
+  return temp;
+}
+
+GWRBRA001::Image GWRBRA001::Image::operator/(const Image & rhs)
+{
+  if(GWRBRA001::Image::width * GWRBRA001::Image::height != rhs.width * rhs.height)
+  {
+    return GWRBRA001::Image();
+  }
+  GWRBRA001::Image temp(rhs.width,rhs.height);
+  GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
+  GWRBRA001::Image::iterator rhsBeg = rhs.begin();
+  GWRBRA001::Image::iterator tempBeg = temp.begin();
+
+  while(beg != end)
+  {
+    if(*rhsBeg == 255)
+    {
+      *tempBeg = *beg;
+    }
+    else
+    {
+      *tempBeg = 0;
+    }
+    ++tempBeg;
+    ++beg;
+    ++rhsBeg;
+  }
+  return temp;
+}
+
+GWRBRA001::Image GWRBRA001::Image::operator*(int threshold)
+{
+  GWRBRA001::Image temp(GWRBRA001::Image::width,GWRBRA001::Image::height);
+  GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
+  GWRBRA001::Image::iterator tempBeg = temp.begin();
+
+  while(beg != end)
+  {
+    if(*beg > threshold)
+    {
+      *tempBeg = 255;
+    }
+    else
+    {
+      *tempBeg = 0;
+    }
+    ++tempBeg;
+    ++beg;
+  }
+  return temp;
+}
 
 unsigned char GWRBRA001::Image::clamp(const unsigned char & val)
 {
