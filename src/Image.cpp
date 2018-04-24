@@ -1,5 +1,6 @@
-
-
+#include <fstream>
+#include <string>
+#include <iostream>
 #include "../include/Image.h"
 /********************Define Image********************/
 GWRBRA001::Image::Image(){}
@@ -176,6 +177,41 @@ unsigned char GWRBRA001::Image::clamp(const unsigned char & val)
   if(val > 255) return 255;
   if(val < 0) return 0;
   return val;
+}
+/*
+void GWRBRA001::Image::load(std::string filePath)
+{
+
+}
+void GWRBRA001::Image::save(std::string filePath)
+{
+
+}
+*/
+
+std::ostream& GWRBRA001::operator<<(std::ostream & os, const GWRBRA001::Image& img)
+{
+  GWRBRA001::Image::iterator beg = img.begin(), end = img.end();
+  while (beg != end)
+  {
+    os << *beg;
+    ++beg;
+  }
+  return os;
+}
+
+//Input
+//If it throws an error it means that not enough binary values exist and the image size is wrong
+std::istream & GWRBRA001::operator>>(std::istream & is, GWRBRA001::Image & img)
+{
+
+  GWRBRA001::Image::iterator beg = img.begin(), end = img.end();
+  while (beg != end)
+  {
+    is >> *beg;
+    ++beg;
+  }
+  return is;
 }
 
 /********************Define Iterator********************/

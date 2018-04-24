@@ -39,15 +39,15 @@ namespace GWRBRA001
       Image operator!(); //Invert
       Image operator/(const Image & rhs);//Mask
       Image operator*(int threshold);
-      /*
+
       //Functions
-      void load(std::string filePath);
-      void save(std::string filePath);
+      //void load(std::string filePath);
+      //void save(std::string filePath);
 
       //Friends
       friend std::ostream& operator<<(std::ostream & os, const Image& img); //Output
       friend std::istream & operator>>(std::istream & is, Image & img); //Input
-      */
+
       unsigned char clamp(const unsigned char & val);
       //Iterator
       class iterator
@@ -73,8 +73,8 @@ namespace GWRBRA001
       iterator end(void) const;
   };
 
-  //std::ostream& operator<<(std::ostream & os, const Image& img); //Output
-  //std::istream & operator>>(std::istream & is, Image & img); //Input
+  std::ostream& operator<<(std::ostream & os, const Image& img); //Output
+  std::istream & operator>>(std::istream & is, Image & img); //Input
 
 }
 
