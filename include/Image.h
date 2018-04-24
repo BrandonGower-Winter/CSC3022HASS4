@@ -22,14 +22,16 @@ namespace GWRBRA001
 
       Image(void);
       ~Image(void);
-      Image(int width,int height,unsigned char imageData[]);
+
+      Image(int width,int height);
 
       Image(const Image & copy);
       Image(Image && move);
-      /*
+
       //Operator Overloads
       Image & operator=(const Image & copy);
       Image & operator=(Image && move);
+      /*
       //Make sure they are the same size
       Image & operator+(const Image & rhs); //Add
       Image & operator-(const Image & rhs); //Sub

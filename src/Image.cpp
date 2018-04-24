@@ -6,15 +6,17 @@ GWRBRA001::Image::Image(){}
 
 GWRBRA001::Image::~Image(){}
 
-GWRBRA001::Image::Image(int width,int height,unsigned char imageData[]) : width(width), height(height), imageBuffer(std::unique_ptr<unsigned char[]>(imageData))
+GWRBRA001::Image::Image(int width,int height) : width(width), height(height)
 {}
 
-GWRBRA001::Image::Image(const Image & copy)
+GWRBRA001::Image::Image(const Image & copy) : width(copy.width), height(copy.height)
 {
+  //Create new space on stack for copy data
+  GWRBRA001::Image::imageBuffer = std::unique_ptr<unsigned char[]>(new unsigned char[copy.width*copy.height]);
   GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
   GWRBRA001::Image::iterator copyBeg = copy.begin(), copyEnd = copy.end();
 
-  while(beg != end)
+  while(copyBeg != copyEnd)
   {
     *beg = *copyBeg;
     ++beg;
@@ -22,20 +24,44 @@ GWRBRA001::Image::Image(const Image & copy)
   }
 }
 
-GWRBRA001::Image::Image(Image && move)
+GWRBRA001::Image::Image(Image && move) : width(move.width), height(move.height)
 {
-  GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
-  GWRBRA001::Image::iterator moveBeg = move.begin(), moveEnd = move.end();
-
-  while(beg != end)
-  {
-    *beg = *moveBeg;
-    *moveBeg = 0;
-    ++beg;
-    ++moveBeg;
-  }
+  move.width = 0;
+  move.height = 0;
+  GWRBRA001::Image::imageBuffer = std::move(move.imageBuffer);
 }
 
+GWRBRA001::Image & GWRBRA001::Image::operator=(const Image & copy)
+{
+  GWRBRA001::Image::width = copy.width;
+  GWRBRA001::Image::height = copy.height;
+
+  GWRBRA001::Image::imageBuffer = std::unique_ptr<unsigned char[]>(new unsigned char[copy.width*copy.height]);
+  GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
+  GWRBRA001::Image::iterator copyBeg = copy.begin(), copyEnd = copy.end();
+
+  while(copyBeg != copyEnd)
+  {
+    *beg = *copyBeg;
+    ++beg;
+    ++copyBeg;
+  }
+
+  return *this;
+
+}
+
+GWRBRA001::Image & GWRBRA001::Image::operator=(Image && move)
+{
+
+  GWRBRA001::Image::width = move.width;
+  GWRBRA001::Image::height = move.height;
+  move.width = 0;
+  move.height = 0;
+  GWRBRA001::Image::imageBuffer = std::move(move.imageBuffer);
+
+  return *this;
+}
 /********************Define Iterator********************/
 GWRBRA001::Image::iterator::iterator(u_char *p) : ptr(p) {}
 
