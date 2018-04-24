@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include "../include/Image.h"
 
 int main(int argc, char const *argv[])
 {

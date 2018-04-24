@@ -19,6 +19,7 @@ namespace GWRBRA001
       std::unique_ptr<unsigned char[]> imageBuffer;
     public:
       //Constructors
+      /*
       Image(void);
       ~Image(void);
       Image(int width,int height,char[] imageBuffer);
@@ -42,31 +43,32 @@ namespace GWRBRA001
       //Friends
       friend std::ostream& operator<<(std::ostream & os, const Image& img); //Output
       friend std::istream & operator>>(std::istream & is, Image & img); //Input
-
+      */
 
       //Iterator
-      friend class iterator
+      class iterator
       {
         private:
           unsigned char *ptr;
-          iterator(u_char *p) : ptr(p) {}
+          iterator(u_char *p);
         public:
-          iterator( const iterator & rhs) : ptr(rhs.ptr) {}
+          iterator( const iterator & rhs);
           // define overloaded ops: *, ++, --, =
           iterator & operator=(const iterator & rhs);
           // other methods for iterator
-          void operator++();
-          void operator--();
-          unsigned char operator*();
+          //void operator++();
+          //void operator--();
+          //unsigned char operator*()
+          friend Image;
         };
       // define begin()/end() to get iterator to start and
       // "one-past" end.
-      iterator begin(void) { return iterator(data.get())} // etc
-      //Define for end
+      //iterator begin(void); // etc
+      //iterator end(void);
   };
 
-  std::ostream& operator<<(std::ostream & os, const Image& img); //Output
-  std::istream & operator>>(std::istream & is, Image & img); //Input
+  //std::ostream& operator<<(std::ostream & os, const Image& img); //Output
+  //std::istream & operator>>(std::istream & is, Image & img); //Input
 
 }
 

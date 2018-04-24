@@ -26,4 +26,4 @@ run:
 
 clean:
 	rm -f build/*.o
-	rm -f ./bin/
+	rm -f ./bin/*
