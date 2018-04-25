@@ -234,7 +234,7 @@ void GWRBRA001::Image::save(std::string filePath)
   }
   out << "P5" << '\n';
   out << "# Created by the GWRBRA001 image processeor!" << '\n';
-  out << GWRBRA001::Image::height << ' ' << GWRBRA001::Image::height << '\n';
+  out << GWRBRA001::Image::height << ' ' << GWRBRA001::Image::width << '\n';
   out << 255 << '\n';
   /*GWRBRA001::Image::iterator beg = this->begin(), end = this->end();
   while(beg != end)

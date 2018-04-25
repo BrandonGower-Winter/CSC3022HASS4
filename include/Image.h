@@ -71,6 +71,8 @@ namespace GWRBRA001
       // "one-past" end.
       iterator begin(void) const;
       iterator end(void) const;
+
+      
   };
 
   std::ostream& operator<<(std::ostream & os, const Image& img); //Output

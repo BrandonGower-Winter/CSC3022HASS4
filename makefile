@@ -5,8 +5,10 @@
 CC := g++
 CCFLAGS := -std=c++11
 SRCDIR := src
+TESTDIR := tests
 BUILDDIR := build
 EXECUTABLE := bin/imageops
+TESTECUTABLE := bin/tests
 
 SRCFLEXT := cpp
 
@@ -23,6 +25,18 @@ $(BUILDDIR)/%.o : $(SRCDIR)/%.$(SRCFLEXT)
 
 run:
 	./$(EXECUTABLE)
+
+test:
+	@echo Compiling...
+	$(CC) $(CCFLAGS) -c -o $(BUILDDIR)/Image.o $(SRCDIR)/Image.cpp
+	$(CC) $(CCFLAGS) -c -o $(BUILDDIR)/UnitTests.o $(TESTDIR)/UnitTests.cpp
+	@echo Compilation Complete
+	@echo Linking...
+	$(CC) $(CCFLAGS) -o $(TESTECUTABLE) $(BUILDDIR)/Image.o $(BUILDDIR)/UnitTests.o
+	@echo Linking Complete
+
+runTests:
+	./$(TESTECUTABLE)
 
 clean:
 	rm -f build/*.o
